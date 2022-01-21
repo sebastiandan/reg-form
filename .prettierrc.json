@@ -1,0 +1,8 @@
+{
+  "semi": false,
+  "tabWidth": 4,
+  "useTabs": true,
+  "printWidth": 102,
+  "singleQuote": true,
+  "editor.formatOnSave": true
+}
