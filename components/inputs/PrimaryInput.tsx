@@ -26,6 +26,8 @@ export const PrimaryInput = ({
 	// only for checkbox
 	const [isChecked, setIsChecked] = useState(false)
 
+	const [hasValue, setHasValue] = useState('')
+
 	const focusInputEl = () => {
 		inputRef.current?.focus()
 	}
@@ -39,13 +41,19 @@ export const PrimaryInput = ({
 
 	const RenderInput = () => {
 		const Input = () => {
+			const handleOnChange = (e: { target: { value: React.SetStateAction<string> } }) => {
+				setHasValue(e.target.value)
+			}
 			return (
 				<input
 					ref={inputRef as RefObject<HTMLInputElement>}
-					className={` ${label ? 'pt-6 pb-2' : 'py-3'} ${renderInput} ${focus} ${hover}`}
+					className={` ${label ? 'pt-6 pb-1' : 'py-3'} ${renderInput} ${focus} ${hover}`}
 					placeholder={placeholder}
+					onChange={handleOnChange}
+					value={hasValue}
 					type={type}
 					id={id}
+					autoFocus
 				/>
 			)
 		}
@@ -83,7 +91,11 @@ export const PrimaryInput = ({
 	const RenderLabel = () => {
 		return (
 			<label
-				className={`pointer-events-none absolute text-Gray left-5 top-[22px] z-10 group-focus-within:-translate-y-3 translate-y-0 text-sm`}
+				className={`pointer-events-none absolute text-Gray left-5 top-[22px] z-10 ${
+					hasValue.length > 0
+						? '-translate-y-3 text-[12px]'
+						: 'group-focus-within:-translate-y-3 group-focus-within:text-[12px]'
+				} translate-y-0 text-sm`}
 				htmlFor={id}
 			>
 				{label}
