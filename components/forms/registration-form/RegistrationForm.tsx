@@ -1,12 +1,18 @@
-import React from 'react'
-import { Layoutform } from '../layouts/FormsLayout'
-import { PrimaryInput } from '../inputs/PrimaryInput'
-import { PrimaryButton } from '../buttons/PrimaryButton'
-import { PrimaryToggle } from '../inputs/PrimaryToggle'
+import React, { MouseEventHandler } from 'react'
+import { Layoutform } from '../../layouts/FormsLayout'
+import { PrimaryInput } from '../../inputs/PrimaryInput'
+import { PrimaryButton } from '../../buttons/PrimaryButton'
+import { PrimaryToggle } from '../../inputs/PrimaryToggle'
 
-import { PasswordField } from './registration-form/PasswordField'
+import { PasswordField } from './PasswordField'
+import { CountrySelect } from './CountrySelect'
+import { LanguageSelect } from './LanguageSelect'
 
-export const RegistrationForm = () => {
+interface RegistrationForm {
+	success: MouseEventHandler
+}
+
+export const RegistrationForm = ({ success }: RegistrationForm) => {
 	return (
 		<Layoutform heading="Registration Form">
 			<form className={`grid gap-6 grid-cols-1`}>
@@ -19,8 +25,8 @@ export const RegistrationForm = () => {
 					/>
 					<PrimaryInput type="text" label="First Name" id="fName" />
 					<PrimaryInput type="text" label="Second Name" id="sName" />
-					<PrimaryInput listbox />
-					<PrimaryInput listbox />
+					<LanguageSelect />
+					<CountrySelect />
 					<PasswordField label="Password" id="password" />
 					<PasswordField label="Confirm Password" id="cPassword" />
 				</div>
@@ -31,7 +37,7 @@ export const RegistrationForm = () => {
 				<div className={`w-full border border-GrayLight`} />
 				<div className={`w-full flex md:flex-row flex-col-reverse items-center`}>
 					<div className={`md:min-w-[270px] mt-9 md:mt-0 w-full md:w-auto`}>
-						<PrimaryButton text="Sign up" />
+						<PrimaryButton onClick={success} text="Sign up" />
 					</div>
 					<div className={`flex md:ml-9 space-x-4 items-center`}>
 						<PrimaryInput type="checkbox" />

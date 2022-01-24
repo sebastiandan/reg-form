@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import { PrimaryLayout } from '../components/layouts/PrimaryLayout'
-import { RegistrationForm } from '../components/forms/RegistrationForm'
+import { Registration } from '../components/forms/Registration'
 
 const Home: NextPage = () => {
 	return (
 		<PrimaryLayout>
-			<RegistrationForm />
+			<Registration />
 		</PrimaryLayout>
 	)
 }

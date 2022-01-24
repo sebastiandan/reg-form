@@ -21,7 +21,12 @@ export const Chevron = ({ pos }: Chevron) => {
 				strokeLinecap="round"
 				strokeLinejoin="round"
 			>
-				<animate attributeName="points" dur="1s" values={pointsUp} repeatCount="indefinite" />
+				<animate
+					attributeName="points"
+					dur="1s"
+					values={pointsDown}
+					repeatCount="indefinite"
+				/>
 			</polyline>
 		</svg>
 	)

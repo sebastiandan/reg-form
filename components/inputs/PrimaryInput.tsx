@@ -1,6 +1,5 @@
 import React, { useState, useRef, RefObject, HTMLInputTypeAttribute, MouseEventHandler } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { Chevron } from '../../assets/chevron'
+import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import checkIcon from '../../assets/check.svg'
 
@@ -10,18 +9,9 @@ interface PrimaryInput {
 	label?: string
 	id?: string
 	type?: HTMLInputTypeAttribute
-	listbox?: boolean
 	icon?: JSX.Element | JSX.Element[] | HTMLElement
 	iconClick?: MouseEventHandler
 }
-
-const people = [
-	{ id: 1, name: 'Durward Reynolds', unavailable: false },
-	{ id: 2, name: 'Kenton Towne', unavailable: false },
-	{ id: 3, name: 'Therese Wunsch', unavailable: false },
-	{ id: 4, name: 'Benedict Kessler', unavailable: true },
-	{ id: 5, name: 'Katelyn Rohan', unavailable: false },
-]
 
 export const PrimaryInput = ({
 	placeholder,
@@ -29,15 +19,12 @@ export const PrimaryInput = ({
 	label,
 	id,
 	type,
-	listbox,
 	icon,
 	iconClick,
 }: PrimaryInput) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 	// only for checkbox
 	const [isChecked, setIsChecked] = useState(false)
-	// only for listbox
-	const [selectListbox, setSelectListbox] = useState(people[0])
 
 	const focusInputEl = () => {
 		inputRef.current?.focus()
@@ -101,56 +88,6 @@ export const PrimaryInput = ({
 			>
 				{label}
 			</label>
-		)
-	}
-
-	if (listbox) {
-		return (
-			<div className={`relative h-16`}>
-				<Listbox value={selectListbox} onChange={setSelectListbox}>
-					{({ open }) => (
-						<div className={`absolute w-full rounded-14 ${open ? 'shadow-xl z-50' : ''}`}>
-							<Listbox.Button
-								className={`${renderInput} text-left flex items-center justify-between ${
-									open
-										? `rounded-b-none bg-white border-t-transparent border-x-transparent border-b-[#F2F5F8]`
-										: hover
-								}`}
-							>
-								<span>{selectListbox.name}</span>
-								<Chevron pos={open} />
-							</Listbox.Button>
-							{open && (
-								<Transition
-									show={open}
-									enter="transition duration-300 ease-out"
-									enterFrom="transform scale-95 opacity-0"
-									enterTo="transform scale-100 opacity-100"
-									leave="transition duration-75 ease-out"
-									leaveFrom="transform scale-100 opacity-100"
-									leaveTo="transform scale-95 opacity-0"
-								>
-									<Listbox.Options
-										static
-										className={`p-2 grid grid-cols-1 gap-1 drop-shadow-SelectShadow bg-white border-0 w-full overflow-auto text-base rounded-b-14 max-h-60 sm:text-sm`}
-									>
-										{people.map((person) => (
-											<Listbox.Option
-												key={person.id}
-												value={person}
-												disabled={person.unavailable}
-												className={`hover:bg-GrayLight rounded-7 px-3 py-2 cursor-pointer text-base text-Gray`}
-											>
-												{person.name}
-											</Listbox.Option>
-										))}
-									</Listbox.Options>
-								</Transition>
-							)}
-						</div>
-					)}
-				</Listbox>
-			</div>
 		)
 	}
 
