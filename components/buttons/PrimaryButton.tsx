@@ -19,7 +19,7 @@ export const PrimaryButton = ({ text, onClick }: PrimaryButton) => {
 		>
 			<span className={`z-10 relative`}>{text}</span>
 			<div
-				className={`${Gradient} absolute -inset-1 group-hover:rotate-180 filter blur-md scale-150 rounded-full -top-20 h-56`}
+				className={`${Gradient} absolute -inset-1 group-hover:rotate-180 scale-150 rounded-full -top-20 h-56`}
 			/>
 		</motion.button>
 	)
